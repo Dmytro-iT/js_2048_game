@@ -73,27 +73,30 @@ document.addEventListener('keydown', (e) => {
     return;
   }
 
-  let moved = false;
+  // ЗМІНА 1: Видалено 'let moved = false;'
 
   switch (e.key) {
     case 'ArrowLeft':
-      moved = game.moveLeft();
+      // ЗМІНА 2: Просто викликаємо функцію
+      game.moveLeft();
       break;
     case 'ArrowRight':
-      moved = game.moveRight();
+      // ЗМІНА 3: Просто викликаємо функцію
+      game.moveRight();
       break;
     case 'ArrowUp':
-      moved = game.moveUp();
+      // ЗМІНА 4: Просто викликаємо функцію
+      game.moveUp();
       break;
     case 'ArrowDown':
-      moved = game.moveDown();
+      // ЗМІНА 5: Просто викликаємо функцію
+      game.moveDown();
       break;
     default:
       return;
   }
 
-  // ВИПРАВЛЕННЯ: Блок if (moved) { game.addRandomTile(); } ВИДАЛЕНО,
-  // оскільки тепер він знаходиться в Game.class.js
+  // Блок if (moved) був видалений раніше
 
   render();
 });

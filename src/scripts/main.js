@@ -1,203 +1,104 @@
 'use strict';
 
-// const Game = require('../modules/Game.class');
-
-class Game {
-  constructor() {
-    this.matrix = [
-      [2, 4, 0, 0],
-      [0, 4, 0, 2],
-      [2, 0, 2, 0],
-      [0, 2, 0, 4]
-    ];
-
-    this.score = 0;
-  }
-
-  shiftRowLeft(row) {
-    let newRow = row.filter(num => num !== 0);
-
-    for (let i = 0; i < newRow.length - 1; i++) {
-      if (newRow[i] === newRow[i + 1]) {
-        newRow[i] *= 2;
-        newRow[i + 1] = 0;
-        i++;
-      }
-    }
-
-    newRow = newRow.filter(num => num !== 0);
-
-    while (newRow.length < 4) {
-      newRow.push(0);
-    }
-
-    return newRow;
-  }
-
-  shiftRowRight(row) {
-    let newRow = row.filter(num => num !== 0);
-
-    for (let i = newRow.length - 1; i > 0; i--) {
-      if (newRow[i] === newRow[i - 1]) {
-        newRow[i] *= 2;
-        newRow[i - 1] = 0;
-        i--;
-      }
-    }
-
-    newRow = newRow.filter(num => num !== 0);
-
-    while(newRow.length < 4) {
-      newRow.unshift(0);
-    }
-
-    return newRow;
-  }
-
-  shiftRowUp(matrix) {
-    let newRow = [];
-    let newMatrix = matrix;
-    let resultMatrix = [
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0]
-    ];
-
-    for (let i = 0; i < 4; i++) {
-      for (let j = 0; j < 4; j++) {
-        newRow.push(newMatrix[j][i]);
-
-        if (newRow.length === 4) {
-          newRow = newRow.filter(num => num !== 0);
-          console.log(newRow);
-
-          for (let n = 0; n < newRow.length - 1; n++) {
-            if (newRow[n] === newRow[n + 1]) {
-              newRow[n] *= 2;
-              newRow[n + 1] = 0;
-              n++;
-            }
-          }
-
-          newRow = newRow.filter(num => num !== 0);
-
-          while (newRow.length < 4) {
-            newRow.push(0);
-          }
-
-          for (let z = 0; z < 4; z++) {
-            resultMatrix[z][i] = newRow[z];
-          }
-
-          newRow = [];
-        }
-      }
-    }
-    return resultMatrix;
-  }
-
-  shiftRowDown(matrix) {
-    let newRow = [];
-    let newMatrix = matrix;
-    let resultMatrix = [
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0]
-    ];
-
-    for (let i = 0; i < 4; i++) {
-      for (let j = 0; j < 4; j++) {
-        newRow.push(newMatrix[j][i]);
-
-        if (newRow.length === 4) {
-          newRow = newRow.filter(num => num !== 0);
-          console.log(newRow);
-
-          for (let n = newRow.length - 1; n > 0; n--) {
-            if (newRow[n] === newRow[n - 1]) {
-              newRow[n] *= 2;
-              newRow[n - 1] = 0;
-              n--;
-            }
-          }
-
-          newRow = newRow.filter(num => num !== 0);
-
-          while (newRow.length < 4) {
-            newRow.unshift(0);
-          }
-
-          for (let z = 0; z < 4; z++) {
-            resultMatrix[z][i] = newRow[z];
-          }
-
-          newRow = [];
-        }
-      }
-    }
-    return resultMatrix;
-  }
-
-  moveLeft() {
-    this.matrix = this.matrix.map(row => this.shiftRowLeft(row));
-    console.log(this.matrix);
-  }
-
-  moveRight() {
-    this.matrix = this.matrix.map(row => this.shiftRowRight(row));
-    console.log(this.matrix);
-  }
-
-  moveUp() {
-    this.matrix = this.shiftRowUp(this.matrix);
-    console.log(this.matrix);
-  }
-
-  moveDown() {
-    this.matrix = this.shiftRowDown(this.matrix);
-    console.log(this.matrix);
-  }
-
-  // getState() {
-
-  // }
-
-  // getScore() {
-
-  // }
-
-  // getStatus() {
-
-  // }
-
-  // start() {
-
-  // }
-
-  // restart() {
-
-  // }
-}
+import Game from '../modules/Game.class.js';
 
 const game = new Game();
 
+const mainButton = document.getElementById('mainButton');
+const scoreEl = document.getElementById('score');
+const startMessage = document.getElementById('startMessage');
+const winMessage = document.getElementById('winMessage');
+const gameOverMessage = document.getElementById('gameOverMessage');
+const boardEl = document.getElementById('board');
+const cells = Array.from(boardEl.querySelectorAll('.cell'));
 
-// document.addEventListener('keydown', event => console.log(event.key));
-document.addEventListener('keydown', event => {
-  switch (event.key) {
-    case 'ArrowUp':
-      game.moveUp();
-      break;
-    case 'ArrowDown':
-      game.moveDown();
-      break;
+function render() {
+  const state = game.getState();
+
+  for (let r = 0; r < 4; r++) {
+    for (let c = 0; c < 4; c++) {
+      const idx = r * 4 + c;
+      const el = cells[idx];
+      const val = state[r][c];
+
+      el.className = 'cell';
+
+      if (val) {
+        el.textContent = val;
+        el.classList.add(`field-cell--${val}`);
+      } else {
+        el.textContent = '';
+      }
+    }
+  }
+
+  scoreEl.textContent = game.getScore();
+
+  const st = game.getStatus();
+
+  startMessage.classList.add('hidden');
+  winMessage.classList.add('hidden');
+  gameOverMessage.classList.add('hidden');
+
+  if (st === 'start') {
+    startMessage.classList.remove('hidden');
+  }
+  else if (st === 'win') {
+    winMessage.classList.remove('hidden');
+  }
+  else if (st === 'lose') {
+    gameOverMessage.classList.remove('hidden');
+  }
+
+  if (st !== 'start') {
+    mainButton.textContent = 'Restart';
+    mainButton.classList.remove('start');
+    mainButton.classList.add('restart');
+  } else {
+    mainButton.textContent = 'Start';
+    mainButton.classList.remove('restart');
+    mainButton.classList.add('start');
+  }
+}
+
+
+mainButton.addEventListener('click', () => {
+  if (game.getStatus() === 'start') {
+    game.start();
+  } else {
+    game.restart();
+  }
+  render();
+});
+
+
+document.addEventListener('keydown', (e) => {
+  if (game.getStatus() !== 'playing') return;
+
+  let moved = false;
+
+  switch (e.key) {
     case 'ArrowLeft':
-      game.moveLeft();
+      moved = game.moveLeft();
       break;
     case 'ArrowRight':
-      game.moveRight();
+      moved = game.moveRight();
       break;
+    case 'ArrowUp':
+      moved = game.moveUp();
+      break;
+    case 'ArrowDown':
+      moved = game.moveDown();
+      break;
+    default:
+      return;
   }
+
+  if (moved) {
+    game.addRandomTile();
+  }
+
+  render();
 });
+
+render();

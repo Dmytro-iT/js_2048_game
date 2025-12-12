@@ -205,9 +205,9 @@ export default class Game {
       return;
     }
 
-    const { r, c } = empty[Math.floor(Math.random() * empty.length)];
+    const { row, col } = empty[Math.floor(Math.random() * empty.length)];
 
-    this.board[r][c] = Math.random() < 0.9 ? 2 : 4;
+    this.board[row][col] = Math.random() < 0.9 ? 2 : 4;
   }
 
   _checkGameStatus() {

@@ -92,9 +92,8 @@ document.addEventListener('keydown', (e) => {
       return;
   }
 
-  if (moved) {
-    game.addRandomTile();
-  }
+  // ВИПРАВЛЕННЯ: Блок if (moved) { game.addRandomTile(); } ВИДАЛЕНО,
+  // оскільки тепер він знаходиться в Game.class.js
 
   render();
 });

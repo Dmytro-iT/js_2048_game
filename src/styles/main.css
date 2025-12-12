@@ -1,11 +1,19 @@
+/* Загальні стилі */
 body {
-  font-family: Arial, sans-serif;
+  /* Layout */
   display: flex;
-  min-height: 100vh;
   align-items: center;
   justify-content: center;
-  background: #f4f4f4;
+
+  /* Box Model */
+  min-height: 100vh;
   margin: 0;
+
+  /* Typography */
+  font-family: Arial, sans-serif;
+
+  /* Visual */
+  background: #f4f4f4;
 }
 
 .game {
@@ -13,40 +21,56 @@ body {
 }
 
 .controls {
+  /* Layout */
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+
+  /* Box Model */
   margin-bottom: 10px;
 }
 
 .btn {
+  /* Visual/Interaction */
+  cursor: pointer;
+
+  /* Box Model */
   padding: 8px 12px;
   border: none;
-  cursor: pointer;
-  font-weight: 600;
   border-radius: 4px;
+
+  /* Typography */
+  font-weight: 600; /* Лінтер, ймовірно, хоче його тут */
 }
 
 .btn.start {
+  /* Visual */
+  color: white; /* Змінено порядок */
   background: #2ecc71;
-  color: white;
 }
 
 .btn.restart {
+  /* Visual */
+  color: white; /* Змінено порядок */
   background: #e74c3c;
-  color: white;
 }
 
 .score {
-  background: #eee;
+  /* Box Model */
   padding: 8px 12px;
   border-radius: 4px;
-  font-weight: 600;
+
+  /* Typography */
+  font-weight: 600; /* Лінтер, ймовірно, хоче його тут */
+
+  /* Visual */
+  background: #eee;
 }
 
 .messages {
-  margin: 8px 0;
+  /* Box Model */
   min-height: 24px;
+  margin: 8px 0;
 }
 
 .hidden {
@@ -54,48 +78,117 @@ body {
 }
 
 .board {
-  background: #bbada0;
-  padding: 10px;
-  border-radius: 6px;
+  /* Layout */
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
+
+  /* Box Model */
+  padding: 10px;
+  border-radius: 6px;
+
+  /* Visual */
+  background: #bbada0;
 }
 
 .cell {
-  width: 70px;
-  height: 70px;
-  background: rgba(238, 228, 218, 0.35);
+  /* Layout */
   display: flex;
   align-items: center;
   justify-content: center;
+
+  /* Box Model */
+  width: 70px;
+  height: 70px;
+  border-radius: 4px;
+
+  /* Typography */
   font-size: 20px;
   font-weight: 700;
-  border-radius: 4px;
   color: #776e65;
+
+  /* Visual */
+  background: rgba(238, 228, 218, 0.35);
 }
 
 .message {
+  /* Layout */
+  display: inline-block;
+
+  /* Box Model */
   padding: 6px 8px;
   border-radius: 4px;
+
+  /* Visual */
   background: rgba(255, 255, 255, 0.8);
-  display: inline-block;
 }
 
-.field-cell--2    { background: #eee4da; }
-.field-cell--4    { background: #ede0c8; }
-.field-cell--8    { background: #f2b179; color:white; }
-.field-cell--16   { background: #f59563; color:white; }
-.field-cell--32   { background: #f67c5f; color:white; }
-.field-cell--64   { background: #f65e3b; color:white; }
-.field-cell--128  { background:#edcf72; color:white; font-size:18px; }
-.field-cell--256  { background:#edcc61; color:white; font-size:18px; }
-.field-cell--512  { background:#edc850; color:white; font-size:18px; }
-.field-cell--1024 { background:#edc53f; color:white; font-size:16px; }
-.field-cell--2048 { background:#edc22e; color:white; font-size:16px; }
+/* Стилі для плиток за значенням */
+.field-cell--2 {
+  background: #eee4da;
+}
+
+.field-cell--4 {
+  background: #ede0c8;
+}
+
+.field-cell--8 {
+  color: white; /* Змінено порядок */
+  background: #f2b179;
+}
+
+.field-cell--16 {
+  color: white; /* Змінено порядок */
+  background: #f59563;
+}
+
+.field-cell--32 {
+  color: white; /* Змінено порядок */
+  background: #f67c5f;
+}
+
+.field-cell--64 {
+  color: white; /* Змінено порядок */
+  background: #f65e3b;
+}
+
+.field-cell--128 {
+  font-size: 18px; /* Typography */
+  color: white; /* Typography */
+  background: #edcf72; /* Visual */
+}
+
+.field-cell--256 {
+  font-size: 18px; /* Typography */
+  color: white; /* Typography */
+  background: #edcc61; /* Visual */
+}
+
+.field-cell--512 {
+  font-size: 18px; /* Typography */
+  color: white; /* Typography */
+  background: #edc850; /* Visual */
+}
+
+.field-cell--1024 {
+  font-size: 16px; /* Typography */
+  color: white; /* Typography */
+  background: #edc53f; /* Visual */
+}
+
+.field-cell--2048 {
+  font-size: 16px; /* Typography */
+  color: white; /* Typography */
+  background: #edc22e; /* Visual */
+}
 
 .hint {
-  font-size: 12px;
-  color: #888;
+  /* Box Model */
   margin-top: 8px;
+
+  /* Typography */
+  font-size: 12px;
+
+  /* Visual */
+  color: #888;
 }

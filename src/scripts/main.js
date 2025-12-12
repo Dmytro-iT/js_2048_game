@@ -42,11 +42,9 @@ function render() {
 
   if (st === 'start') {
     startMessage.classList.remove('hidden');
-  }
-  else if (st === 'win') {
+  } else if (st === 'win') {
     winMessage.classList.remove('hidden');
-  }
-  else if (st === 'lose') {
+  } else if (st === 'lose') {
     gameOverMessage.classList.remove('hidden');
   }
 
@@ -61,7 +59,6 @@ function render() {
   }
 }
 
-
 mainButton.addEventListener('click', () => {
   if (game.getStatus() === 'start') {
     game.start();
@@ -71,9 +68,10 @@ mainButton.addEventListener('click', () => {
   render();
 });
 
-
 document.addEventListener('keydown', (e) => {
-  if (game.getStatus() !== 'playing') return;
+  if (game.getStatus() !== 'playing') {
+    return;
+  }
 
   let moved = false;
 

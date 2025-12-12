@@ -30,7 +30,7 @@ body {
   margin-bottom: 10px;
 }
 
-.btn {
+.button {
   /* Visual/Interaction */
   cursor: pointer;
 
@@ -43,13 +43,13 @@ body {
   font-weight: 600; /* Лінтер, ймовірно, хоче його тут */
 }
 
-.btn.start {
+.button.start {
   /* Visual */
   color: white; /* Змінено порядок */
   background: #2ecc71;
 }
 
-.btn.restart {
+.button.restart {
   /* Visual */
   color: white; /* Змінено порядок */
   background: #e74c3c;

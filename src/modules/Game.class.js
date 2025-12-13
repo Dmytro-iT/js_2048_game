@@ -116,11 +116,9 @@ export default class Game {
         this.board = transformedBoard;
       }
 
-      // ВИПРАВЛЕННЯ: Додаємо плитку тут, якщо рух був успішним
       this.addRandomTile();
     }
 
-    // ВИПРАВЛЕННЯ: Завжди перевіряємо статус після спроби руху
     this._checkGameStatus();
 
     return moved;
@@ -157,10 +155,10 @@ export default class Game {
       rotatedBoard = this._rotate(rotatedBoard);
       rotatedBoard = this._rotate(rotatedBoard);
       this.board = this._rotate(rotatedBoard);
-      this.addRandomTile(); // ВИПРАВЛЕННЯ: Додаємо плитку
+      this.addRandomTile();
     }
 
-    this._checkGameStatus(); // ВИПРАВЛЕННЯ: Завжди перевіряємо статус
+    this._checkGameStatus();
 
     return moved;
   }
@@ -190,10 +188,10 @@ export default class Game {
 
     if (moved) {
       this.board = this._rotate(rotatedBoard);
-      this.addRandomTile(); // ВИПРАВЛЕННЯ: Додаємо плитку
+      this.addRandomTile();
     }
 
-    this._checkGameStatus(); // ВИПРАВЛЕННЯ: Завжди перевіряємо статус
+    this._checkGameStatus();
 
     return moved;
   }

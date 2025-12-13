@@ -73,30 +73,22 @@ document.addEventListener('keydown', (e) => {
     return;
   }
 
-  // ЗМІНА 1: Видалено 'let moved = false;'
-
   switch (e.key) {
     case 'ArrowLeft':
-      // ЗМІНА 2: Просто викликаємо функцію
       game.moveLeft();
       break;
     case 'ArrowRight':
-      // ЗМІНА 3: Просто викликаємо функцію
       game.moveRight();
       break;
     case 'ArrowUp':
-      // ЗМІНА 4: Просто викликаємо функцію
       game.moveUp();
       break;
     case 'ArrowDown':
-      // ЗМІНА 5: Просто викликаємо функцію
       game.moveDown();
       break;
     default:
       return;
   }
-
-  // Блок if (moved) був видалений раніше
 
   render();
 });
